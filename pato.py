@@ -32,5 +32,26 @@ pato_coluna = random.randint(0, tamanho -1)
 
 tentativas = []
 
+icones = [
 
+    "🏹🏹🏹🏹🏹"
+    "💥🏹🏹🏹🏹"
+    "💥💥🏹🏹🏹"
+    "💥💥💥🏹🏹"
+    "💥💥💥💥🏹"
+    "💥💥💥💥💥"
+]
+
+
+# ===================status========================
+
+#def usado para definir uma função ou seja, nesse caso você pode usala varias vezes chamando mostrar_status()
+def mostrar_status():
+    erros = 5 - disparos
+    print(Fore.YELLOW + f"Status: {icones[erros]}")
+    print(Fore.CYAN + f"Disparos restantes: {disparos}/5")
+
+    print(Fore.GREEN + "Mapa:")
+    for linha in grid:
+        print(" ".join(linha))
 
