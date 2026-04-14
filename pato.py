@@ -24,7 +24,34 @@ def mostrar_regras():
     print(Fore.GREEN + ' 1- O jogadore tem 5 disparos;\n 2- O tempo Máximo é de 1 minuto; \n 3- O jogador inicia com 50 pontos, cada erro desconta 10')
 
 def mostrar_ranking():
-    pass
+    print(Fore.YELLOW + "\n--- TOP 10 (Vitórias por menor tempo) ---")
+    
+
+    try:
+        with open("ranking.txt", "r", encoding="utf-8") as arq:
+            vitorias = []
+
+            for registro in arq:
+
+                try: #usado para tratar erros (exceções) e evitar que o programa quebre quando algo inesperado acontece.
+                    nome, resultado, tempo = registro.strip().split(";") #.strip() em Python é um método usado para remover espaços (ou outros caracteres) do início e do fim de uma string.
+                    #append adiciona elementos ao final de uma lista
+                    if resultado.upper() == "VITORIA":
+                        vitorias.append((nome, float(tempo)))
+                except ValueError:
+                    continue
+
+        if not vitorias:
+            print(Fore.RED + "Nenhuma vitória registrada ainda.")
+            return
+        for pos, (nome, tempo) in enumerate(sorted(vitorias, key=lambda x: x[1])[:10], start=1):
+            print(Fore.CYAN + f"{pos:02d}. {nome} - {tempo:.2f}s")
+
+            #Essa parte faz o Top 10 ordenado por menor tempo e imprime formatado:
+            #sorted(vitorias, key=lambda x: x[1]) ---- ordena a lista pelo 2º item da tupla (tempo).
+
+    except FileNotFoundError:
+        print(Fore.RED + "Arquivo ranking.txt ainda não existe.")
 
 def jogar():
     venceu = False
@@ -174,7 +201,7 @@ def jogar():
 # with open(..., "a"): abre/cria arquivo em modo append (adiciona no final sem apagar).
     with open("ranking.txt", "a") as arq:
         # Operador ternário: escolhe "VITORIA" se acertou, senão "DERROTA".
-        resultado = "VITORIA" if (linha == pato_linha and coluna == pato_coluna) else "DERROTA"
+        resultado = "VITORIA" if venceu else "DERROTA"
         # write: grava uma linha no formato nome;resultado;duracao.
         arq.write(f"{nome};{resultado};{duracao:.2f}\n")
 
