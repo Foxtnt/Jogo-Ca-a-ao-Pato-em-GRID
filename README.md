@@ -1,4 +1,8 @@
-# Jogo Caça ao Pato em Grid
+<p align="center">
+	<img src="https://media.giphy.com/media/ardMfW1w53UvC/giphy.gif" alt="Caça ao pato" width="360" />
+</p>
+
+<h1 align="center">Jogo Caça ao Pato em Grid</h1>
 
 Projeto em Python com mecânica de caça ao pato em um grid 5x5, usando entradas por linha/coluna no terminal, limite de disparos e tempo máximo de partida.
 
